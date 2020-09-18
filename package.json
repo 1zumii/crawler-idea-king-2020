@@ -1,0 +1,16 @@
+{
+  "name": "idea-king2020",
+  "version": "1.0.0",
+  "description": "第十届艾景奖学生组入围作品投票结果爬取",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:xxx8848/idea-king2020.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
