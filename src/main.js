@@ -54,8 +54,10 @@ function parseWorksInfo(url) {
                             const unorderedListItem = cheerElement.text().split('：')
                             writeContent += `- **${unorderedListItem[0]}**：${unorderedListItem[1]}\n`
                         } else if (cheerElement.attr('style') === 'margin-top:10px;') {
+                            const illustrationSrc = _c(cheerElement.children('.picvj')).attr('data-original')
                             const illustrationAlt = _c(cheerElement.children('p').get(0)).text()
                             const paragraphContent = _c(cheerElement.children('p').get(1)).text()
+                            writeContent+=`![${illustrationAlt}](${targetOrigin}${illustrationSrc})\n`
                             writeContent += `\n${paragraphContent}\n`
                         } else if (cheerElement.hasClass('votett')) {
                             const paragraphTitle2 = cheerElement.children('.tt').text()
