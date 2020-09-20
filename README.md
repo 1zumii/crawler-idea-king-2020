@@ -1,9 +1,19 @@
 - [第十届艾景奖学生组入围作品投票](https://www.idea-king.org/mobile/tpxs.php?from=timeline)
-- [目录 BackupCatalogue](./backupCatalogue.md)
+- [目录 BackupCatalogue](./resource/backupCatalogue.md)
 
-## 参考
+## 参考文章
 - [Cheerio - 中文文档](https://github.com/cheeriojs/cheerio/wiki/Chinese-README)
 - [Node.js可能是最适合写简易小爬虫的语言，速度极快、代码极少 - 知乎](https://zhuanlan.zhihu.com/p/61583602)
+- [node-"fs-extra"模块代替fs使用 - 掘金](https://juejin.im/post/6844903641594216455)
+- [node.js简单爬虫扒取妹子图 - 知乎](https://zhuanlan.zhihu.com/p/26556429)
+- [jQuery 遍历 - 后代](https://www.runoob.com/jquery/jquery-traversing-descendants.html) *Cheerio类似于jQuery*
+
+## 踩坑总结
+- `$().find()`的结果并不是一个数组，再`.get()`以后才是一个数组
+- `.find()`是找节点下的所有后代，并不是隔一代的子元素
+- `.get()`的参数是 index
+- `.text()`是只有用`$()`包裹的对象才可以使用，`.find()`的结果也可以作为其参数
+- `.find()`可以使用`.each()`。`.get()`后则不行，因为得到的是一个 Array，但是可以使用原生的`forEach()`
 
 ## 解析思路
 ![](resource/2020-09-19_10.07.35.png)
