@@ -57,7 +57,15 @@ function parseWorksInfo(url) {
                             const illustrationSrc = _c(cheerElement.children('.picvj')).attr('data-original')
                             const illustrationAlt = _c(cheerElement.children('p').get(0)).text()
                             const paragraphContent = _c(cheerElement.children('p').get(1)).text()
-                            writeContent+=`![${illustrationAlt}](${targetOrigin}${illustrationSrc})\n`
+
+                            // 爬取图片
+                            const matchGroup = illustrationSrc.match(/\/(\w+\.(jpg|png))/)
+                            if (matchGroup) {
+                                request(targetOrigin + illustrationSrc).pipe(
+                                    fs.createWriteStream(`${currentRootPath}/${matchGroup[1]}`)
+                                )
+                                writeContent += `\n![${illustrationAlt}](${matchGroup[1]})\n`
+                            }
                             writeContent += `\n${paragraphContent}\n`
                         } else if (cheerElement.hasClass('votett')) {
                             const paragraphTitle2 = cheerElement.children('.tt').text()
