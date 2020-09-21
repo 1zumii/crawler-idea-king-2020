@@ -45,7 +45,7 @@ fs.readdir('../backupResults', (err, directories) => {
         infoArr.sort((a, b) => -(a.thumbCount - b.thumbCount))
         infoArr.forEach((projectInfo, index) => {
             const { projectName, worksNumber } = projectInfo
-            writeContent += `${index + 1}. [${projectName}](./${worksNumber}/index.md)\n`
+            writeContent += `${index + 1}. [${projectName}](../backupResults/${worksNumber}/index.md)\n`
         })
         fs.writeFileSync('../resource/backupCatalogue.md', writeContent)
     }).catch(reason => {
