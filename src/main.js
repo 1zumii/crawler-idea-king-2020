@@ -62,7 +62,10 @@ function parseWorksInfo(url) {
                             const matchGroup = illustrationSrc.match(/\/(\w+\.(jpg|png))/)
                             if (matchGroup) {
                                 request(targetOrigin + illustrationSrc).pipe(
-                                    fs.createWriteStream(`${currentRootPath}/${matchGroup[1]}`)
+                                    fs.createWriteStream(
+                                        `${currentRootPath}/${matchGroup[1]}`,
+                                        { autoClose: true }
+                                    )
                                 )
                                 writeContent += `\n![${illustrationAlt}](${matchGroup[1]})\n`
                             }
@@ -88,19 +91,24 @@ function parseWorksInfo(url) {
 }
 
 getHrefList().then(value => {
-    const temp = value.slice(0, 20)
-    temp.reduce((lastPromise, currentHref, index) => {
+    const hrefArr = value
+    hrefArr.reduce((lastPromise, currentHref, index) => {
         return lastPromise.then(lastResult => {
             if (typeof (lastResult) === 'number') {
                 console.log('>>> start script')
             } else {
                 const { projectName, url, worksNumber } = lastResult
-                console.log(`[${index}/${temp.length}]\t${worksNumber}\t${projectName}`)
+                console.log(`[${index}/${hrefArr.length}]  ${worksNumber}\t${projectName}`)
             }
             return parseWorksInfo(currentHref)
+        }).catch(err => {
+            console.error(`[${index}/${hrefArr.length}]  ${worksNumber}\t${projectName} --error`)
+            console.error(err)
         })
-    }, Promise.resolve(temp.length)).then(lastResult => {
+    }, Promise.resolve(hrefArr.length)).then(lastResult => {
         const { projectName, url, worksNumber } = lastResult
-        console.log(`[${temp.length}/${temp.length}]\t${worksNumber}\t${projectName}`)
+        console.log(`[${hrefArr.length}/${hrefArr.length}]\t${worksNumber}\t${projectName}`)
+    }).catch(reason => {
+        console.error(reason)
     })
 })

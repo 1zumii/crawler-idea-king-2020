@@ -15,6 +15,21 @@
 - `.text()`是只有用`$()`包裹的对象才可以使用，`.find()`的结果也可以作为其参数
 - `.find()`可以使用`.each()`。`.get()`后则不行，因为得到的是一个 Array，但是可以使用原生的`forEach()`
 
+## 翻车报错
+```bash
+internal/streams/legacy.js:61
+      throw er; // Unhandled stream error in pipe.
+      ^
+
+Error: getaddrinfo ENOTFOUND www.idea-king.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26) {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'www.idea-king.org'
+}
+```
+
 ## 解析思路
 ![](resource/2020-09-19_10.07.35.png)
 - 主要信息都包含在`id="dowebok"`中
