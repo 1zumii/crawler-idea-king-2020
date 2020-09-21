@@ -91,18 +91,18 @@ function parseWorksInfo(url) {
 }
 
 getHrefList().then(value => {
-    const hrefArr = value
+    const hrefArr = value.splice(0, 20)
     hrefArr.reduce((lastPromise, currentHref, index) => {
         return lastPromise.then(lastResult => {
             if (typeof (lastResult) === 'number') {
                 console.log('>>> start script')
             } else {
                 const { projectName, url, worksNumber } = lastResult
-                console.log(`[${index}/${hrefArr.length}]  ${worksNumber}\t${projectName}`)
+                console.log(`[${index}/${hrefArr.length}]\t${worksNumber}\t${projectName}`)
             }
             return parseWorksInfo(currentHref)
         }).catch(err => {
-            console.error(`[${index}/${hrefArr.length}]  ${worksNumber}\t${projectName} --error`)
+            console.error(`[${index}/${hrefArr.length}]\t${worksNumber}\t${projectName} --error`)
             console.error(err)
         })
     }, Promise.resolve(hrefArr.length)).then(lastResult => {
